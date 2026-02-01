@@ -2,38 +2,47 @@
 
 {% block content %}
 
-<h2>Available Food Posts</h2>
+<h1 style="
+    text-align:center;
+    background-color:#2c7a7b;
+    color:white;
+    padding:20px;
+">
+    🍽️ Food Waste Redistribution System
+</h1>
 
 {% if messages %}
     {% for message in messages %}
         <div style="
-            background-color: #d4edda;
-            color: #155724;
-            padding: 10px;
-            text-align: center;
-            margin-bottom: 15px;
-            border-radius: 5px;">
+            background-color:#d4edda;
+            color:#155724;
+            padding:10px;
+            text-align:center;
+            margin:10px auto;
+            width:80%;
+            border-radius:5px;
+        ">
             {{ message }}
         </div>
     {% endfor %}
 {% endif %}
 
-{% if food_posts %}
+<div class="container">
     {% for food in food_posts %}
         <div class="card">
             <h3>{{ food.food_item }}</h3>
-            <p class="info"><strong>Restaurant:</strong> {{ food.restaurant_name }}</p>
-            <p class="info"><strong>Quantity:</strong> {{ food.quantity }}</p>
-            <p class="info"><strong>Expiry Time:</strong> {{ food.expiry_time }}</p>
+            <p><strong>Restaurant:</strong> {{ food.restaurant_name }}</p>
+            <p><strong>Quantity:</strong> {{ food.quantity }}</p>
+            <p><strong>Expiry Time:</strong> {{ food.expiry_time }}</p>
 
             <form action="{% url 'claim_food' food.id %}" method="post">
                 {% csrf_token %}
                 <button class="claim-btn" type="submit">Claim Food</button>
             </form>
         </div>
+    {% empty %}
+        <p>No food available right now 🍃</p>
     {% endfor %}
-{% else %}
-    <p class="empty">No food available right now 🍃</p>
-{% endif %}
+</div>
 
 {% endblock %}
