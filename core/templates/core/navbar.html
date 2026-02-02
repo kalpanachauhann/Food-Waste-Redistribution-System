@@ -1,4 +1,23 @@
-<div class="navbar">
-    <h1>🍽️ Food Waste Redistribution System</h1>
-    <p>Connecting Restaurants with NGOs</p>
+<div style="
+    background: linear-gradient(135deg, #1f4037, #99f2c8);
+    padding: 25px 40px;
+    color: white;
+">
+    <div style="max-width:1100px; margin:auto; display:flex; justify-content:space-between; align-items:center;">
+        <div>
+            <h1 style="margin:0;">🍽️ Food Waste Redistribution</h1>
+            <p style="margin:5px 0 0; font-size:14px;">
+                Connecting Restaurants & NGOs for a Better Tomorrow
+            </p>
+        </div>
+
+        {% if user.is_authenticated %}
+        <div style="font-size:14px;">
+            👤 <strong>{{ user.username }}</strong><br>
+            <a href="{% url 'logout' %}" style="color:#ffeb3b; text-decoration:none;">
+                Logout
+            </a>
+        </div>
+        {% endif %}
+    </div>
 </div>
